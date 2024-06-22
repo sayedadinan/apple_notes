@@ -49,4 +49,35 @@ class DataStorage {
       return log(e.toString());
     }
   }
+
+  Future<int> deleteData(int id) async {
+    try {
+      sql.Database database = await db();
+      int rowsDeleted = await database.delete(
+        'note',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      log('Deleted $rowsDeleted rows with ID: $id');
+      return rowsDeleted;
+    } catch (e) {
+      log('Error deleting note: ${e.toString()}');
+      return -1;
+    }
+  }
+
+  searchData(String keyword) async {
+    try {
+      sql.Database database = await db();
+      return await database.query(
+        'note',
+        where: 'title LIKE ? OR notes LIKE ?',
+        whereArgs: ['%$keyword%', '%$keyword%'],
+        orderBy: "id",
+      );
+    } catch (e) {
+      log('Error searching notes: ${e.toString()}');
+      return [];
+    }
+  }
 }

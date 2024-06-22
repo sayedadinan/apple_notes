@@ -39,92 +39,54 @@ class _NotePreviewScreenState extends State<NotePreviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.darkBackgroundGray,
-        middle: const Text(
-          'Data',
-          style: TextStyle(
-            color: CupertinoColors.systemYellow,
-          ),
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CupertinoButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                PopupMenuButton(
-                  itemBuilder: (context) =>
-                      [const PopupMenuItem(child: Text('Find in Note'))],
-                );
-              },
-              child: const Icon(
-                CupertinoIcons.settings_solid,
-                color: CupertinoColors.systemYellow,
-              ),
+    return Material(
+      child: CupertinoPageScaffold(
+        navigationBar: CupertinoNavigationBar(
+          backgroundColor: CupertinoColors.darkBackgroundGray,
+          middle: const Text(
+            'Data',
+            style: TextStyle(
+              color: CupertinoColors.systemYellow,
             ),
-            const SizedBox(width: 8),
-            GestureDetector(
-              onTap: () {
-                updateData(
-                  titleController.text,
-                  notesController.text,
-                  widget.date,
-                  widget.id,
-                );
-                Get.to(
-                  const ListScreen(),
-                  transition: Transition.cupertino,
-                  duration: const Duration(milliseconds: 1050),
-                );
-              },
-              child: const Text(
-                'Done',
-                style: TextStyle(
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {},
+                child: const Icon(
+                  CupertinoIcons.settings_solid,
                   color: CupertinoColors.systemYellow,
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-      child: Column(
-        children: [
-          TitleTextEditingController(titleController: titleController),
-          const SizedBox(height: 16.0),
-          NoteEditingController(notesController: notesController),
-        ],
-      ),
-    );
-  }
-
-  void showEditOptions() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoPopupSurface(
-          child: Column(
-            // mainAxisSize: MainAxisSize.min,
-            children: [
-              CupertinoButton(
-                onPressed: () {
-                  // Handle edit title action
-                  // Example: Navigator.pop(context);
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
+                  updateData(titleController.text, notesController.text,
+                      widget.date, widget.id);
+                  Get.to(const ListScreen(),
+                      transition: Transition.cupertino,
+                      duration: const Duration(milliseconds: 1050));
                 },
-                child: const Text('Edit Title'),
-              ),
-              CupertinoButton(
-                onPressed: () {
-                  // Handle edit notes action
-                  // Example: Navigator.pop(context);
-                },
-                child: const Text('Edit Notes'),
+                child: const Text(
+                  'Done',
+                  style: TextStyle(
+                    color: CupertinoColors.systemYellow,
+                  ),
+                ),
               ),
             ],
           ),
-        );
-      },
+        ),
+        child: Column(
+          children: [
+            TitleTextEditingController(titleController: titleController),
+            const SizedBox(height: 16.0),
+            NoteEditingController(notesController: notesController),
+          ],
+        ),
+      ),
     );
   }
 
