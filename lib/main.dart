@@ -3,7 +3,7 @@ import 'package:apple_notes/screens/list_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_cupertino_app.dart';
-
+//hi
 void main() {
   runApp(
     BlocProvider(
